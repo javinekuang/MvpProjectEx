@@ -1,7 +1,9 @@
 package k.javine.mvpprojectex;
 
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,6 +37,14 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     }
 
     @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        res.getConfiguration().fontScale = 1;
+        res.updateConfiguration(null,null);
+        return res;
+    }
+
+    @Override
     public void updateUi(String data) {
         tv_result.setText(data);
     }
@@ -43,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements IView, View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_update:
+                Log.d("Javine","fontScale = "+getResources().getConfiguration().fontScale);
                 myPresenter.loadData();
                 break;
         }
